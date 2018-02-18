@@ -1,0 +1,81 @@
+<app-head-bar></app-head-bar>
+
+<section class="section">
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">Carrinho</h1>
+      <h2 class="subtitle"> Confira nossos super produtos!
+      </h2>
+    </div>
+
+    <table class="table is-striped is-fullwidth">
+      <thead>
+        <tr>
+          <th class="has-text-centered">Produto</th>
+          <th class="has-text-centered">Valor</th>
+          <th class="has-text-centered">Qntde</th>
+          <th class="has-text-centered">Total</th>
+          <th class="has-text-centered"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td class="has-text-centered">{{ item?.price }}</td>
+          <td class="has-text-centered">R$ {{ item?.price | number: '1.2-2' }} </td>
+          <td class="has-text-centered">
+            <input type="number" [(ngModel)]="item.quantity" (change)="checkQuantity(item)" style="width: 60px">
+          </td>
+          <td class="has-text-centered">
+            <strong>R$ {{ item.price * item.quantity | number: '1.2-2'}}</strong>
+          </td>
+          <td class="has-text-centered">
+            <button (click)="remove(item)" class="button is-small is-danger">Remover</button>
+          </td>
+        </tr>
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="4">
+            <h2 class="subtitle">SubTotal</h2>
+          </td>
+          <td class="has-text-centered">
+            <strong>R$ {{ getSubTotal() | number: '1.2-2' }}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <h2 class="subtitle">Taxa de Entrega</h2>
+          </td>
+          <td class="has-text-centered">
+            <strong>R$ {{ deliveryFee | number: '1.2-2' }}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <h2 class="subtitle">Desconto</h2>
+          </td>
+          <td class="has-text-centered">
+            <strong>R$ {{ discount | number: '1.2-2' }}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <h2 class="subtitle">Total</h2>
+          </td>
+          <td class="has-text-centered">
+            <strong>R$ {{getSubTotal() + deliveryFee | number: '1.2-2'}}</strong>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <p class="has-text-right">
+      <button (click)="checkout()" class="button is-success is-large animated pulse infinite"><i class="fa fa-check"></i>&nbsp; CHECKOUT
+      </button>
+    </p>
+
+  </div>
+
+</section>
+<app-footer></app-footer>

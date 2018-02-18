@@ -1,0 +1,61 @@
+<section class="hero is-success is-fullheight">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title pacifico larger-text">
+        Modern Web Store
+      </h1>
+
+      <div class="columns">
+        <div class="column is-half is-offset-one-quarter">
+
+          <div class="notification is-danger" *ngIf="badNotifications.length > 0">
+            <ul>
+              <li *ngFor="let notification of badNotifications">{{ notification.message }}</li>
+            </ul>
+          </div>
+          <form [formGroup]="form">
+
+            <p id="usernameControl">
+              <input class="input is-large" type="username" placeholder="Usuário" formControlName="username" [ngClass]="{'is-danger': (!form.controls.username.valid && !form.controls.username.pristine)}">
+              <span class="tag is-danger" *ngIf="!form.controls.username.valid && !form.controls.username.pristine">Usuário inválido</span>
+            </p>
+
+            <p class="control">
+              <input class="input is-large" type="password" placeholder="Senha" formControlName="password" [ngClass]="{'is-danger': (!form.controls.password.valid && !form.controls.password.pristine)}">
+              <span class="tag is-danger" *ngIf="!form.controls.password.valid && !form.controls.password.pristine">Senha inválido</span>
+            </p>
+
+            <br>
+
+            <p>
+              <button (click)="submit()" class="button is-primary is-inverted is-outlined is-large is-fullwidth" [disabled]="!form.valid">ENTRAR</button>
+              <br>
+              <button routerLink="/signup" class="button is-primary is-inverted is-outlined is-fullwidth">AINDA NÃO SOU CADASTRADO</button>
+            </p>
+            <p>
+              <button class="button is-primary is-inverted is-outlined is-fullwidth" (click)="showModal()">TERMOS DE USO</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="modal" id="modal">
+  <div class="modal-background">
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Termos de Uso</p>
+        <button class="delete" (click)="hideModal()"></button>
+      </header>
+      <section class="modal-card-body">
+        conteúdo dos termos de uso.
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-" (click)="hideModal()">OK</button>
+      </footer>
+    </div>
+  </div>
+</div>
